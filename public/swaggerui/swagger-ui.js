@@ -1519,7 +1519,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
       _ref5 = this.model.parameters;
       for (_i = 0, _len = _ref5.length; _i < _len; _i++) {
         param = _ref5[_i];
-        type = param.type || param.dataType;
+        type = param.type || param.dataType || param.paramType;
         if (type.toLowerCase() === 'file') {
           if (!contentTypeModel.consumes) {
             log("set content type ");
