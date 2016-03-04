@@ -504,6 +504,7 @@ SwaggerModel.prototype.createJSONSample = function(modelsToIgnore) {
 var SwaggerModelProperty = function(name, obj) {
   this.name = name;
   this.dataType = obj.type || obj.dataType || obj["$ref"];
+  this.dataType = _.isArray(this.dataType) ? this.dataType[0] : this.dataType;
   this.isCollection = this.dataType && (this.dataType.toLowerCase() === 'array' || this.dataType.toLowerCase() === 'list' || this.dataType.toLowerCase() === 'set');
   this.descr = obj.description;
   this.required = obj.required;
@@ -815,7 +816,7 @@ SwaggerOperation.prototype.urlify = function(args) {
     var param = params[i];
     if (param.paramType === 'path') {
       if(args[param.name]) {
-        // changed Glenn Jones - #168 issue from mattboutet 
+        // changed Glenn Jones - #168 issue from mattboutet
         // -----------------------
         var reg = new RegExp('\{' + param.name + '\}', 'gi');
         // -----------------------
@@ -966,7 +967,7 @@ var SwaggerRequest = function(type, url, params, opts, successCallback, errorCal
     var possibleParams = {};
     var values = {};
 
-    // changed Glenn Jones - #36 issue from ivorothschild 
+    // changed Glenn Jones - #36 issue from ivorothschild
     // -----------------------
     for(var i = 0; i < formParams.length; i++){
       var param = formParams[i];
